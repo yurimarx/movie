@@ -72,7 +72,7 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 /// List movies
 ClassMethod GetAllMovies() As %Status
 {
-  Return ##class(dc.movie.service.MovieService).GetAllMovies()
+  Return ##class(dc.movie.service.MovieService).GetAll()
 }
 
 /// Get movie casting
@@ -84,127 +84,127 @@ ClassMethod GetMovieCasting(id As %Integer) As %Status
 /// Get a movie
 ClassMethod GetMovie(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.MovieService).GetMovie(id)
+  Return ##class(dc.movie.service.MovieService).GetOne(id)
 }
 
 // Create a new movie
 
 ClassMethod CreateMovie() As %Status
 {
-  Return ##class(dc.movie.service.MovieService).CreateMovie()
+  Return ##class(dc.movie.service.MovieService).Create()
 }
 
 // Update a movie
 
 ClassMethod UpdateMovie(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.MovieService).UpdateMovie(id)
+  Return ##class(dc.movie.service.MovieService).Update(id)
 }
 
 // Delete a movie
 
 ClassMethod DeleteMovie(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.MovieService).DeleteMovie(id)
+  Return ##class(dc.movie.service.MovieService).Delete(id)
 }
 
 /// List movies categories
 ClassMethod GetAllMovieCategories() As %Status
 {
-  Return ##class(dc.movie.service.MovieCategoryService).GetAllMovieCategories()
+  Return ##class(dc.movie.service.MovieCategoryService).GetAll()
 }
 
 /// Get a movie category
 ClassMethod GetMovieCategory(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.MovieCategoryService).GetMovieCategory(id)
+  Return ##class(dc.movie.service.MovieCategoryService).GetOne(id)
 }
 
 // Create a new movie category
 
 ClassMethod CreateMovieCategory() As %Status
 {
-  Return ##class(dc.movie.service.MovieCategoryService).CreateMovieCategory()
+  Return ##class(dc.movie.service.MovieCategoryService).Create()
 }
 
 // Update a movie category
 
 ClassMethod UpdateMovieCategory(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.MovieCategoryService).UpdateMovieCategory(id)
+  Return ##class(dc.movie.service.MovieCategoryService).Update(id)
 }
 
 // Delete a movie category
 
 ClassMethod DeleteMovieCategory(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.MovieCategoryService).DeleteMovieCategory(id)
+  Return ##class(dc.movie.service.MovieCategoryService).Delete(id)
 }
 
 /// List actors
 ClassMethod GetAllActors() As %Status
 {
-  Return ##class(dc.movie.service.ActorService).GetAllActors()
+  Return ##class(dc.movie.service.TestActorService).GetAll()
 }
 
 /// Get an actor
 ClassMethod GetActor(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.ActorService).GetActor(id)
+  Return ##class(dc.movie.service.ActorService).GetOne(id)
 }
 
 // Create a new actor
 
 ClassMethod CreateActor() As %Status
 {
-  Return ##class(dc.movie.service.ActorService).CreateActor()
+  Return ##class(dc.movie.service.ActorService).Create()
 }
 
 // Update an actor
 
 ClassMethod UpdateActor(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.ActorService).UpdateActor(id)
+  Return ##class(dc.movie.service.ActorService).Update(id)
 }
 
 // Delete an actor
 
 ClassMethod DeleteActor(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.ActorService).DeleteActor(id)
+  Return ##class(dc.movie.service.ActorService).Delete(id)
 }
 
 /// List castings
 ClassMethod GetAllCastings() As %Status
 {
-  Return ##class(dc.movie.service.CastingService).GetAllCastings()
+  Return ##class(dc.movie.service.CastingService).GetAll()
 }
 
 /// Get a casting
 ClassMethod GetCasting(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.CastingService).GetCasting(id)
+  Return ##class(dc.movie.service.CastingService).GetOne(id)
 }
 
 // Create a new casting item
 
 ClassMethod CreateCasting() As %Status
 {
-  Return ##class(dc.movie.service.CastingService).CreateCasting()
+  Return ##class(dc.movie.service.CastingService).Create()
 }
 
 // Update a casting
 
 ClassMethod UpdateCasting(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.CastingService).UpdateCasting(id)
+  Return ##class(dc.movie.service.CastingService).Update(id)
 }
 
 // Delete a casting
 
 ClassMethod DeleteCasting(id As %Integer) As %Status
 {
-  Return ##class(dc.movie.service.CastingService).DeleteCasting(id)
+  Return ##class(dc.movie.service.CastingService).Delete(id)
 }
 
 /// General information

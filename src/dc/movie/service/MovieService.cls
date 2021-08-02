@@ -1,133 +1,32 @@
 Class dc.movie.service.MovieService Extends %CSP.REST
 {
 
-Parameter CHARSET = "utf-8";
-
-Parameter CONVERTINPUTSTREAM = 1;
-
-Parameter CONTENTTYPE = "application/json";
-
-Parameter Version = "1.0.0";
-
-Parameter HandleCorsRequest = 1;
-
-/// Return all the records
-ClassMethod GetAllMovies() As %Status
+ClassMethod GetAll() As %Status
 {
-
-    #dim tSC As %Status = $$$OK
-
-    Set rset = ##class(dc.movie.model.Movie).ExtentFunc()
-
-    Set %response.ContentType = ..#CONTENTTYPEJSON
-    Set %response.Headers("Access-Control-Allow-Origin")="*"
-    
-    Write "["
-    
-    if rset.%Next() {
-        Set movie = ##class(dc.movie.model.Movie).%OpenId(rset.ID)    
-        Do movie.%JSONExport()
-    }
-    
-    While rset.%Next() {   
-        Write "," 
-        Set movie = ##class(dc.movie.model.Movie).%OpenId(rset.ID)    
-        Do movie.%JSONExport()
-    }
-
-    Write "]"
-
-    Quit tSC
+    Return ##class(dc.movie.service.CrudUtilService).GetAll(##class(dc.movie.model.Movie).%New())
 }
 
-/// Return one record
-ClassMethod GetMovie(id As %Integer) As %Status
+ClassMethod GetOne(id As %Integer) As %Status
 {
-	#dim tSC As %Status = $$$OK
-    #dim e As %Exception.AbstractException
-
-
-    #; Set the response header to plain text
-    Set %response.ContentType = ..#CONTENTTYPEJSON
-    Set %response.Headers("Access-Control-Allow-Origin")="*"
-
-    Set movie = ##class(dc.movie.model.Movie).%OpenId(id)
-
-    If '$IsObject(movie) Quit ..Http404()
-
-    Do movie.%JSONExport()
-
-    Quit tSC
+    Return ##class(dc.movie.service.CrudUtilService).GetOne(##class(dc.movie.model.Movie).%New(), id)
 }
 
-/// Creates a new record
-ClassMethod CreateMovie() As %Status
+ClassMethod Create() As %Status
 {
-	
-    #dim tSC As %Status = $$$OK
-    #dim e As %Exception.AbstractException
-    
-    Set movie = ##class(dc.movie.model.Movie).%New()
-
-    Set data = {}.%FromJSON(%request.Content)
-
-    $$$TOE(tSC,movie.%JSONImport(data))
-    $$$TOE(tSC,movie.%Save())
-
-    Write movie.%JSONExport()
-
-    Set %response.Status = 204
-    Set %response.ContentType = ..#CONTENTTYPEJSON
-    Set %response.Headers("Access-Control-Allow-Origin")="*"
-    
-    Quit tSC
+    Return ##class(dc.movie.service.CrudUtilService).Create(##class(dc.movie.model.Movie).%New())
 }
 
-/// Update a record with id
-ClassMethod UpdateMovie(id As %Integer) As %Status
+ClassMethod Update(id As %Integer) As %Status
 {
-	#dim tSC As %Status = $$$OK 
-    #dim e As %Exception.AbstractException
-    
-    Set movie = ##class(dc.movie.model.Movie).%OpenId(id) 
-    
-    If '$IsObject(movie) Return ..Http404()
-    
-    Set data = {}.%FromJSON(%request.Content)
-
-    $$$TOE(tSC,movie.%JSONImport(data))
-    $$$TOE(tSC,movie.%Save())
-    
-    Write movie.%JSONExport()
-
-    Set %response.Status = 200
-    Set %response.ContentType = ..#CONTENTTYPEJSON
-    Set %response.Headers("Access-Control-Allow-Origin")="*"
-
-    Quit tSC
+    Return ##class(dc.movie.service.CrudUtilService).Update(##class(dc.movie.model.Movie).%New(), id)
 }
 
-/// Delete a record with id
-ClassMethod DeleteMovie(id As %Integer) As %Status
+ClassMethod Delete(id As %Integer) As %Status
 {
-	#dim tSC As %Status = $$$OK
-    #dim e As %Exception.AbstractException
-    
-    Set movie = ##class(dc.movie.model.Movie).%OpenId(id)
-    
-    If '$IsObject(movie) Return ..Http404()
-
-    $$$TOE(tSC, movie.%DeleteId(id))
-
-    Set %response.Status = 200
-
-    Set %response.ContentType = ..#CONTENTTYPEJSON
-    Set %response.Headers("Access-Control-Allow-Origin")="*"
-
-    Quit tSC
+    Return ##class(dc.movie.service.CrudUtilService).Delete(##class(dc.movie.model.Movie).%New(), id)
 }
 
-/// Return all the records
+/// Return casting from the movie
 ClassMethod GetMovieCasting(id As %Integer) As %Status
 {
 

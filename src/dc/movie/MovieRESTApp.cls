@@ -144,7 +144,7 @@ ClassMethod DeleteMovieCategory(id As %Integer) As %Status
 /// List actors
 ClassMethod GetAllActors() As %Status
 {
-  Return ##class(dc.movie.service.TestActorService).GetAll()
+  Return ##class(dc.movie.service.ActorService).GetAll()
 }
 
 /// Get an actor
